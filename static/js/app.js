@@ -170,7 +170,9 @@ function renderTask(data) {
   let attachmentLis = _.map(attachments, (item) => {
     let isImage = item.ext === 'jpg' || item.ext === 'jpeg' || item.ext === 'png' || item.ext === 'gif';
     return `
-        <li><a href="${item.url}" ${isImage ? 'target="_blank"' : 'download'}>${item.name}</a></li>
+        <li><a href="${item.url}" ${isImage ? 'target="_blank"' : 'download'}>${item.name}</a>
+        <button type="button" class="btn btn-primary btn-xs pull-right" onclick="javascript:void()">删除</button>
+        </li>
       `;
   }).join('');
   if (attachments.length === 0) {

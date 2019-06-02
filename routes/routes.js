@@ -22,6 +22,7 @@ router.get('/login', index_route.login);
 router.get('/register', index_route.register);
 router.post('/login', index_route.process_login);
 router.post('/register', index_route.process_register);
+router.post('/addUser', index_route.addUser);
 router.get('/logout', index_route.logout);
 router.post('/uploadFile', login_filter.is_login, index_route.uploadFile);
 router.get('/chat', login_filter.is_login, chat_route.index);
@@ -39,6 +40,7 @@ router.get('/admin/index', login_filter.is_login, admin_filter.is_admin, index_a
 
 router.get('/admin/user/list', login_filter.is_login, admin_filter.is_admin, user_admin_route.list);
 router.get('/admin/user/edit', login_filter.is_login, admin_filter.is_admin, user_admin_route.edit);
+router.get('/admin/user/add', login_filter.is_login, admin_filter.is_admin, user_admin_route.add);
 router.post('/admin/user/edit', login_filter.is_login, admin_filter.is_admin, user_admin_route.process_edit);
 router.get('/admin/user/delete', login_filter.is_login, admin_filter.is_admin, user_admin_route.delete);
 

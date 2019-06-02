@@ -9,8 +9,10 @@
   </li>
   <li class="active">{{project.name}}</li>
   <span class="pull-right">
+    {% if showSetBtn===1 %}
     <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#modal-id-update'>项目设置</button>
     <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#modal-id'>创建任务</button>
+    {% endif %}
   </span>
 </ol>
 

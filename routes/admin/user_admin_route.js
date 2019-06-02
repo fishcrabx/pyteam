@@ -20,6 +20,17 @@ exports.edit = async (ctx) => {
   });
 };
 
+exports.add = async (ctx) => {
+    const id = ctx.request.query.id;
+    //let user = await user_service.findById(id);
+    let departments = await department_service.findAll({});
+    await ctx.render('admin/user/add', {
+        page_title: '编辑用户',
+        //user: user,
+        departments: departments
+    });
+};
+
 exports.process_edit = async (ctx) => {
   const id = ctx.request.body.id;
   const username = ctx.request.body.username;
