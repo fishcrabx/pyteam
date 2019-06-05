@@ -1,0 +1,77 @@
+{% if not is_pjax %}
+{% extends "./layout/layout.html" %}
+{% endif %}
+{% block page_content %}
+
+<ol class="breadcrumb">
+    <li>
+        <a data-pjax href="/">Home</a>
+    </li>
+    <li class="active">系统列表</li>
+    <span class="pull-right">
+    {% if showAddBtn===1 %}
+    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" href='#modal-id'>创建系统</button>
+    {% endif %}
+  </span>
+</ol>
+
+<div class="row" id="projects_div">
+
+</div>
+
+{# 创建任务模态框 #}
+<div class="modal fade" id="modal-id">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">创建系统</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return;" id="modal_form">
+                    <div class="form-group">
+                        <label for="">系统名</label>
+                        <input type="text" class="form-control" id="name" placeholder="系统名">
+                    </div>
+                    <div class="form-group">
+                        <label for="">描述</label>
+                        <textarea id="intro" rows="5" class="form-control" placeholder="描述..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modalCloseBtn" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveSystem()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block page_js %}
+<script>
+    $('.spinner').show();
+    setTimeout(function () {
+        ws.emit('data', {code: 929, detail: {}});
+    }, 500);
+
+    // 保存系统
+    function saveSystem() {
+        let name = $("#name").val();
+        let intro = $("#intro").val();
+        if (name.length === 0) {
+            alert("系统名不能为空");
+            return;
+        }
+        ws.emit('data', {
+            code: 927,
+            detail: {
+                name: name,
+                intro: intro
+            }
+        });
+        $("#modal_form")[0].reset();
+        $("#modalCloseBtn").click();
+    }
+</script>
+{% endblock %}

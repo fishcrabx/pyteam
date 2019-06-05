@@ -1,0 +1,23 @@
+{% if not is_pjax %}
+{% extends "./layout/layout.html" %}
+{% endif %}
+{% block page_content %}
+<ol class="breadcrumb">
+    <li>
+        <a data-pjax href="/">Home</a>
+    </li>
+    <li class="active">{{system.name}}</li>
+</ol>
+
+<div id="system_detail_div"></div>
+<div id="system_attachment_div"></div>
+
+{% endblock %}
+{% block page_js %}
+<script>
+    $('.spinner').show();
+    setTimeout(function () {
+        ws.emit('data', {code: 930, detail: {systemId: {{ system.id}}}});
+    }, 500);
+</script>
+{% endblock %}

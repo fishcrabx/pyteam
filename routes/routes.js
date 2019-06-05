@@ -20,11 +20,17 @@ const department_admin_route = require('./admin/department_admin_route');
 router.get('/', login_filter.is_login, index_route.index);
 router.get('/login', index_route.login);
 router.get('/register', index_route.register);
+router.get('/system', index_route.system);
+router.get('/modifyPassword', login_filter.is_login,index_route.modifyPassword);
+router.post('/modifyPassword', login_filter.is_login,index_route.process_modifyPassword);
+router.get('/system/:systemId', index_route.systemDetail);
 router.post('/login', index_route.process_login);
 router.post('/register', index_route.process_register);
 router.post('/addUser', index_route.addUser);
 router.get('/logout', index_route.logout);
 router.post('/uploadFile', login_filter.is_login, index_route.uploadFile);
+router.post('/deleteFile', login_filter.is_login, index_route.deleteFile);
+router.post('/uploadSystemFile', login_filter.is_login, index_route.uploadSystemFile);
 router.get('/chat', login_filter.is_login, chat_route.index);
 
 router.get('/project', login_filter.is_login, project_route.index);
@@ -52,10 +58,10 @@ router.get('/admin/department/add', login_filter.is_login, admin_filter.is_admin
 router.post('/admin/department/add', login_filter.is_login, admin_filter.is_admin, department_admin_route.process_add);
 router.get('/admin/department/edit', login_filter.is_login, admin_filter.is_admin, department_admin_route.edit);
 router.post(
-  '/admin/department/edit',
-  login_filter.is_login,
-  admin_filter.is_admin,
-  department_admin_route.process_edit
+    '/admin/department/edit',
+    login_filter.is_login,
+    admin_filter.is_admin,
+    department_admin_route.process_edit
 );
 router.get('/admin/department/delete', login_filter.is_login, admin_filter.is_admin, department_admin_route.delete);
 

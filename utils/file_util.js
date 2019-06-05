@@ -56,3 +56,11 @@ exports.generatorAvatar = async (username, text) => {
     //return `${config.base_url}/avatar/${username}/avatar.png`;
     return `/avatar/${username}/avatar.png`;
 };
+
+
+exports.deleteAttachments = async (url) => {
+    let index = url.lastIndexOf(`/`);
+    let p = url.slice(0, index);
+    let newFileName = 'del-' + url.slice(index + 1);
+    fs.renameSync(path.join(config.static_dir, url), path.join(config.static_dir, p, newFileName));
+}
